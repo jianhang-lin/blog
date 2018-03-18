@@ -46,7 +46,8 @@ public class EsBlogServiceTest {
 
 	@Test
 	public void testGetEsBlogByBlogId() {
-		// fail("Not yet implemented");
+		EsBlog esBlog = esBlogService.getEsBlogByBlogId(1L);
+		Assert.assertThat(esBlog.getTitle(), is("Hello World!"));
 	}
 
 	@Test
