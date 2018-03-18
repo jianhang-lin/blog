@@ -102,7 +102,10 @@ public class BlogServiceTest {
 
 	@Test
 	public void testRemoveComment() {
-		// fail("Not yet implemented");
+		int beforSize = blogService.getBlogById(6L).getCommentSize();
+		blogService.removeComment(6L, 5L);
+		int afterSize = blogService.getBlogById(6L).getCommentSize();
+		Assert.assertThat(beforSize - afterSize, is(1));
 	}
 
 	@Test
