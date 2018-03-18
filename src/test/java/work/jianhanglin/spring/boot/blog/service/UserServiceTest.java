@@ -2,6 +2,8 @@ package work.jianhanglin.spring.boot.blog.service;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +44,8 @@ public class UserServiceTest {
 
 	@Test
 	public void testListUsers() {
+		List<User> users = userService.listUsers();
+		Assert.assertThat(users.get(0).getId(), is(1L));
 	}
 
 	@Test
