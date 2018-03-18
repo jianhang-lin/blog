@@ -35,7 +35,9 @@ public class EsBlogServiceTest {
 
 	@Test
 	public void testRemoveEsBlog() {
-		// fail("Not yet implemented");
+		esBlogService.removeEsBlog("AWIxuTsYO9d5JRBjGS-8");
+		EsBlog esBlog = esBlogService.getEsBlogByBlogId(1L);
+		Assert.assertNull(esBlog);
 	}
 
 	@Test
