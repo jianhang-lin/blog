@@ -34,6 +34,8 @@ public class CatalogServiceTest {
 
 	@Test
 	public void testGetCatalogById() {
+		Catalog catalog = catalogService.getCatalogById(1L);
+		Assert.assertThat(catalog.getName(), is("Hello"));
 	}
 
 	@Test
