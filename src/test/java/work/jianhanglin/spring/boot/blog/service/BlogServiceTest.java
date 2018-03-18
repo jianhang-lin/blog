@@ -11,10 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.Blog;
 import work.jianhanglin.spring.boot.blog.domain.Catalog;
+import work.jianhanglin.spring.boot.blog.domain.Comment;
 import work.jianhanglin.spring.boot.blog.domain.User;
 import work.jianhanglin.spring.boot.blog.domain.Vote;
 import work.jianhanglin.spring.boot.blog.repository.BlogRepository;
@@ -89,7 +91,13 @@ public class BlogServiceTest {
 
 	@Test
 	public void testCreateComment() {
-		// fail("Not yet implemented");
+		String commentContent = "test";
+		Blog originalBlog = blogRepository.findOne(6L);
+		User user = userService.getUserById(1L);
+		Comment comment = new Comment(user, commentContent);
+		originalBlog.addComment(comment);
+		Blog returnBlog = blogService.saveBlog(originalBlog);
+		Assert.assertThat(returnBlog.getComments().get(0).getContent(), is(commentContent));
 	}
 
 	@Test
