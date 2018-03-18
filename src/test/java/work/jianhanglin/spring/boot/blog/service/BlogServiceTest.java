@@ -94,7 +94,12 @@ public class BlogServiceTest {
 
 	@Test
 	public void testRemoveVote() {
-		// fail("Not yet implemented");
+		/**
+		 * 需要Blog实体的votes字段的fetch属性设置成FetchType.EAGER
+		 */
+		blogService.removeVote(6L, 7L);
+		Blog blog = blogService.getBlogById(6L);
+		Assert.assertThat(blog.getVoteSize(), is(0));
 	}
 
 }
