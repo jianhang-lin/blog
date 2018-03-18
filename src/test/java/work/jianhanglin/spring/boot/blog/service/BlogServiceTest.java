@@ -3,10 +3,14 @@ package work.jianhanglin.spring.boot.blog.service;
 import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.Blog;
@@ -18,6 +22,8 @@ import work.jianhanglin.spring.boot.blog.repository.BlogRepository;
 @SpringBootTest
 public class BlogServiceTest {
 
+	Pageable pageable = null;
+
 	@Autowired
 	private BlogService blogService;
 
@@ -26,6 +32,11 @@ public class BlogServiceTest {
 
 	@Autowired
 	private UserService userService;
+
+	@Before
+	public void testBefore() {
+		pageable = new PageRequest(0, 5);
+	}
 
 	@Test
 	public void testSaveBlog() {
@@ -48,7 +59,9 @@ public class BlogServiceTest {
 
 	@Test
 	public void testListBlogsByTitleVote() {
-		// fail("Not yet implemented");
+		User user = userService.getUserById(1L);
+		Page<Blog> blogs = blogService.listBlogsByTitleVote(user, "Hello", pageable);
+		Assert.assertThat(blogs.getTotalElements(), is(2L));
 	}
 
 	@Test
