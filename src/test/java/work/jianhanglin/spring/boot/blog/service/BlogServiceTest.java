@@ -24,9 +24,11 @@ public class BlogServiceTest {
 		Assert.assertThat(blog.getTitle(), is("标题"));
 	}
 
-	@Test
+	@Test(expected = Exception.class)
 	public void testRemoveBlog() {
-		// fail("Not yet implemented");
+		blogService.removeBlog(3L);
+		Blog blog = blogService.getBlogById(3L);
+		Assert.assertThat(blog.getTitle(), is("testRemove"));
 	}
 
 	@Test
