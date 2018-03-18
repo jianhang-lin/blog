@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import work.jianhanglin.spring.boot.blog.domain.User;
 import work.jianhanglin.spring.boot.blog.domain.es.EsBlog;
 import work.jianhanglin.spring.boot.blog.vo.TagVO;
 
@@ -86,7 +87,8 @@ public class EsBlogServiceTest {
 
 	@Test
 	public void testListTop12Users() {
-		// fail("Not yet implemented");
+		List<User> users = esBlogService.listTop12Users();
+		Assert.assertThat(users.size(), is(1));
 	}
 
 }
