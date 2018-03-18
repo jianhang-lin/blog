@@ -1,0 +1,68 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.11.BUILD-SNAPSHOT'
+	}
+	// 自定义Thymeleaf和Thymeleaf Layout Dialect的版本
+	ext['thymeleaf.version'] = '3.0.3.RELEASE'
+	ext['thymeleaf-layout-dialect.version'] = '2.2.0'
+	//自定义Hibernate版本
+	ext['hibernate.version'] = '5.3.0.CR1'
+	repositories {
+		mavenCentral()
+		maven {
+			url 'http://maven.aliyun.com/nexus/content/groups/public/'
+		}
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+		
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'work.jianhanglin.spring.boot.blog'
+version = '1.0.0'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+		url 'http://maven.aliyun.com/nexus/content/groups/public/'
+	}
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+	
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	// 添加  Spring Security 依赖
+	compile('org.springframework.boot:spring-boot-starter-security')
+	//添加SpringDataJPA的依赖
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	//添加MYSQL连接驱动的依赖
+	compile('mysql:mysql-connector-java:8.0.9-rc')
+	// 添加   Thymeleaf Spring Security 依赖，与 Thymeleaf 版本一致都是 3.x
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE')
+	// 添加 Spring Boot 开发工具依赖
+ 	//compile("org.springframework.boot:spring-boot-devtools")
+	//添加Apache Commons Lang依赖
+	compile('org.apache.commons:commons-lang3:3.7')
+	// 添加 Markdown parser 依赖
+	compile('es.nitaur.markdown:txtmark:0.16')
+	// 添加  Spring Data Elasticsearch 的依赖
+	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+	
+	// 添加  JNA 的依赖
+	compile('net.java.dev.jna:jna:4.3.0')
+	//添加H2的依赖
+	runtime('com.h2database:h2:1.4.196')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
