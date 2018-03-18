@@ -71,7 +71,7 @@ public class Blog implements Serializable {
 	@org.hibernate.annotations.CreationTimestamp // 由数据库自动创建时间
 	private Timestamp createTime;
 
-	@Column(name = "readSize")
+	@Column(name = "read_size")
 	private Integer readSize = 0; // 访问量、阅读量
 
 	@Column(name = "commentSize")
