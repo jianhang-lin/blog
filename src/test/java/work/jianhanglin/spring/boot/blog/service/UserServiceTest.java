@@ -2,6 +2,7 @@ package work.jianhanglin.spring.boot.blog.service;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -60,6 +61,11 @@ public class UserServiceTest {
 
 	@Test
 	public void testListUsersByUsernames() {
+		List<String> userNames = new ArrayList<String>();
+		userNames.add("Jianhang");
+		userNames.add("Tom");
+		List<User> users = userService.listUsersByUsernames(userNames);
+		Assert.assertNotNull(users);
 	}
 
 }
