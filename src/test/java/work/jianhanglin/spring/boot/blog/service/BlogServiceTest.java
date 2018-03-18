@@ -66,7 +66,9 @@ public class BlogServiceTest {
 
 	@Test
 	public void testListBlogsByTitleVoteAndSort() {
-		// fail("Not yet implemented");
+		User user = userService.getUserById(1L);
+		Page<Blog> blogs = blogService.listBlogsByTitleVoteAndSort(user, "Hello", pageable);
+		Assert.assertThat(blogs.getTotalElements(), is(2L));
 	}
 
 	@Test
