@@ -40,6 +40,10 @@ public class UserServiceTest {
 
 	@Test
 	public void testUpdateUser() {
+		User user = userService.getUserById(3L);
+		user.setName("Fanny");
+		user = userService.updateUser(user);
+		Assert.assertThat(user.getName(), is("Fanny"));
 	}
 
 	@Test
