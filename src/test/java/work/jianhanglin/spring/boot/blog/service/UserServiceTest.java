@@ -33,7 +33,15 @@ public class UserServiceTest {
 	}
 
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testRemoveUser() {
+		List<User> beforeUsers = userService.listUsers();
+		int beforeSize = beforeUsers.size();
+		userService.removeUser(10L);
+		List<User> afterUsers = userService.listUsers();
+		int afterSize = afterUsers.size();
+		Assert.assertThat(beforeSize - afterSize, is(1));
 	}
 
 	@Test
