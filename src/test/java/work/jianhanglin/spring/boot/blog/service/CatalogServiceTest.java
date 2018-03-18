@@ -26,6 +26,11 @@ public class CatalogServiceTest {
 
 	@Test
 	public void testSaveCatalog() {
+		User user = userService.getUserById(1L);
+		Catalog catalog = new Catalog(user, "Test");
+		catalogService.saveCatalog(catalog);
+		catalog = catalogService.getCatalogById(2L);
+		Assert.assertThat(catalog.getName(), is("Test"));
 	}
 
 	@Test
