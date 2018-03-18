@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.Blog;
@@ -86,7 +85,12 @@ public class BlogServiceTest {
 
 	@Test
 	public void testReadingIncrease() {
-		// fail("Not yet implemented");
+		Blog blog = blogRepository.findOne(6L);
+		int beforeNo = blog.getReadSize();
+		blogService.readingIncrease(6L);
+		blog = blogRepository.findOne(6L);
+		int afterNo = blog.getReadSize();
+		Assert.assertThat(afterNo - beforeNo, is(1));
 	}
 
 	@Test
