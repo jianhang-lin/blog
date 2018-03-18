@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.User;
@@ -50,6 +53,9 @@ public class UserServiceTest {
 
 	@Test
 	public void testListUsersByNameLike() {
+		Pageable pageable = new PageRequest(0, 5);
+		Page<User> users = userService.listUsersByNameLike("Tom", pageable);
+		Assert.assertThat(users.getTotalElements(), is(1L));
 	}
 
 	@Test
