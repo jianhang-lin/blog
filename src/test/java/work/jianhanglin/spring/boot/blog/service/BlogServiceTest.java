@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.Blog;
+import work.jianhanglin.spring.boot.blog.domain.Catalog;
 import work.jianhanglin.spring.boot.blog.domain.User;
 import work.jianhanglin.spring.boot.blog.domain.Vote;
 import work.jianhanglin.spring.boot.blog.repository.BlogRepository;
@@ -32,6 +33,9 @@ public class BlogServiceTest {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private CatalogService catalogService;
 
 	@Before
 	public void testBefore() {
@@ -73,7 +77,9 @@ public class BlogServiceTest {
 
 	@Test
 	public void testListBlogsByCatalog() {
-		// fail("Not yet implemented");
+		Catalog catalog = catalogService.getCatalogById(1L);
+		Page<Blog> blogs = blogService.listBlogsByCatalog(catalog, pageable);
+		Assert.assertThat(blogs.getTotalElements(), is(5L));
 	}
 
 	@Test
