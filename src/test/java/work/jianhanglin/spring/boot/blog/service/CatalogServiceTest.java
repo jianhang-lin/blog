@@ -35,6 +35,13 @@ public class CatalogServiceTest {
 
 	@Test
 	public void testRemoveCatalog() {
+		User user = userService.getUserById(1L);
+		List<Catalog> catalogs = catalogService.listCatalogs(user);
+		int beforeSize = catalogs.size();
+		catalogService.removeCatalog(2L);
+		catalogs = catalogService.listCatalogs(user);
+		int afterSize = catalogs.size();
+		Assert.assertThat(beforeSize - afterSize, is(1));
 	}
 
 	@Test
