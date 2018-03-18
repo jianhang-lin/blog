@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.Blog;
+import work.jianhanglin.spring.boot.blog.domain.User;
+import work.jianhanglin.spring.boot.blog.domain.Vote;
+import work.jianhanglin.spring.boot.blog.repository.BlogRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -17,6 +20,12 @@ public class BlogServiceTest {
 
 	@Autowired
 	private BlogService blogService;
+
+	@Autowired
+	private BlogRepository blogRepository;
+
+	@Autowired
+	private UserService userService;
 
 	@Test
 	public void testSaveBlog() {
@@ -69,7 +78,18 @@ public class BlogServiceTest {
 
 	@Test
 	public void testCreateVote() {
-		// fail("Not yet implemented");
+		/**
+		 * 需要Blog实体的votes字段的fetch属性设置成FetchType.EAGER
+		 */
+		Blog originalBlog = blogRepository.findOne(6L);
+		User user = userService.getUserById(1L);
+		Vote vote = new Vote(user);
+		boolean isExist = originalBlog.addVote(vote);
+		if (isExist) {
+			throw new IllegalArgumentException("该用户已经点过赞了");
+		}
+		Blog returnBlog = blogService.saveBlog(originalBlog);
+		Assert.assertThat(returnBlog.getVoteSize(), is(1));
 	}
 
 	@Test
