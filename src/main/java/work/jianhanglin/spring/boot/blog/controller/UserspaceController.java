@@ -58,6 +58,13 @@ public class UserspaceController {
 	@Autowired
 	private CatalogService catalogService;
 
+	/**
+	 * 对应用户博客
+	 * 
+	 * @param username
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/{username}")
 	public String userSpace(@PathVariable("username") String username, Model model) {
 		User user = (User) userDetailsService.loadUserByUsername(username);
@@ -65,6 +72,13 @@ public class UserspaceController {
 		return "redirect:/u/" + username + "/blogs";
 	}
 
+	/**
+	 * 用户主页设置
+	 * 
+	 * @param username
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/{username}/profile")
 	@PreAuthorize("authentication.name.equals(#username)")
 	public ModelAndView profile(@PathVariable("username") String username, Model model) {
@@ -134,6 +148,19 @@ public class UserspaceController {
 		return ResponseEntity.ok().body(new Response(true, "处理成功", avatarUrl));
 	}
 
+	/**
+	 * 根据排序展示博客
+	 * 
+	 * @param username
+	 * @param order
+	 * @param catalogId
+	 * @param keyword
+	 * @param async
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/{username}/blogs")
 	public String listBlogsByOrder(@PathVariable("username") String username,
 			@RequestParam(value = "order", required = false, defaultValue = "new") String order,

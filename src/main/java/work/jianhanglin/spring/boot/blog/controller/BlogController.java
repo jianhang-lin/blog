@@ -32,6 +32,17 @@ public class BlogController {
 	@Autowired
 	private EsBlogService esBlogService;
 
+	/**
+	 * 展示博客数据
+	 * 
+	 * @param order
+	 * @param keyword
+	 * @param async
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param model
+	 * @return
+	 */
 	@GetMapping
 	public String listEsBlogs(@RequestParam(value = "order", required = false, defaultValue = "new") String order,
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
@@ -81,6 +92,12 @@ public class BlogController {
 		return (async == true ? "/index :: #mainContainerRepleace" : "/index");
 	}
 
+	/**
+	 * 展示最新新闻
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/newest")
 	public String listNewestEsBlogs(Model model) {
 		List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
@@ -88,6 +105,12 @@ public class BlogController {
 		return "newest";
 	}
 
+	/**
+	 * 展示最热新闻
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/hotest")
 	public String listHotestEsBlogs(Model model) {
 		List<EsBlog> hotest = esBlogService.listTop5HotestEsBlogs();

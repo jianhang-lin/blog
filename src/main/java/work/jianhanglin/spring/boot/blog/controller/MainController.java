@@ -31,11 +31,21 @@ public class MainController {
 	@Autowired
 	private AuthorityService authorityService;
 
+	/**
+	 * 获取index页面
+	 * 
+	 * @return
+	 */
 	@GetMapping("/")
 	public String root() {
 		return "redirect:/index";
 	}
 
+	/**
+	 * 获取blogs页面
+	 * 
+	 * @return
+	 */
 	@GetMapping("/index")
 	public String index() {
 		return "redirect:/blogs";

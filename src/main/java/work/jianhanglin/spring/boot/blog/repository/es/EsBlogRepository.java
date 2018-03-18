@@ -16,6 +16,7 @@ public interface EsBlogRepository extends ElasticsearchRepository<EsBlog, String
 
 	/**
 	 * 模糊查询(去重)
+	 * 
 	 * @param title
 	 * @param Summary
 	 * @param content
@@ -26,5 +27,11 @@ public interface EsBlogRepository extends ElasticsearchRepository<EsBlog, String
 	Page<EsBlog> findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(String title,
 			String Summary, String content, String tags, Pageable pageable);
 
+	/**
+	 * 通过博客id查询
+	 * 
+	 * @param blogId
+	 * @return
+	 */
 	EsBlog findByBlogId(Long blogId);
 }
