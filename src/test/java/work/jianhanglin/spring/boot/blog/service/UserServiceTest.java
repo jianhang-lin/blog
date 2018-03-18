@@ -5,14 +5,17 @@ import static org.hamcrest.CoreMatchers.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Proxy;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import work.jianhanglin.spring.boot.blog.domain.User;
@@ -44,6 +47,11 @@ public class UserServiceTest {
 
 	@Test
 	public void testGetUserById() {
+		/**
+		 * 需在实体类User上加@Proxy(lazy=false)
+		 */
+		User user = userService.getUserById(3L);
+		Assert.assertThat(user.getName(), is("Tom"));
 	}
 
 	@Test

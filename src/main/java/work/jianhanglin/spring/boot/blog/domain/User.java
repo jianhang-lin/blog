@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  */
 @Entity
+@Proxy(lazy=false)
 public class User implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
