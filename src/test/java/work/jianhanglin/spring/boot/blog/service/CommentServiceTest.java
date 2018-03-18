@@ -24,8 +24,11 @@ public class CommentServiceTest {
 		Assert.assertThat(comment.getContent(), is("Hello"));
 	}
 
-	@Test
+	@Test(expected = Exception.class)
 	public void testRemoveComment() {
+		commentService.removeComment(1L);
+		Comment comment = commentService.getCommentById(1L);
+		Assert.assertThat(comment.getContent(), is("Hello"));
 	}
 
 }
