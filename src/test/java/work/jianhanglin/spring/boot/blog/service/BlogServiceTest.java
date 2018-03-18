@@ -14,7 +14,7 @@ import work.jianhanglin.spring.boot.blog.domain.Blog;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BlogServiceTest {
-	
+
 	@Autowired
 	private BlogService blogService;
 
@@ -26,52 +26,53 @@ public class BlogServiceTest {
 
 	@Test
 	public void testRemoveBlog() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetBlogById() {
-		//fail("Not yet implemented");
+		Blog blog = blogService.getBlogById(1L);
+		Assert.assertThat(blog.getTitle(), is("Hello World!"));
 	}
 
 	@Test
 	public void testListBlogsByTitleVote() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testListBlogsByTitleVoteAndSort() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testListBlogsByCatalog() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testReadingIncrease() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCreateComment() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testRemoveComment() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCreateVote() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 	@Test
 	public void testRemoveVote() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 }
