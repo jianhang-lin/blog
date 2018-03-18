@@ -13,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import work.jianhanglin.spring.boot.blog.domain.User;
 
@@ -35,7 +37,14 @@ public class UserServiceTest {
 	}
 
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testRemoveUsersInBatch() {
+		List<User> users = new ArrayList<User>();
+		users.add(userService.getUserById(8L));
+		userService.removeUsersInBatch(users);
+		User user = userService.getUserById(8L);
+		Assert.assertThat(user.getId(), is(8L));
 	}
 
 	@Test
